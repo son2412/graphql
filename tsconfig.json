@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "lib": ["es5", "es6"],
+    "target": "es5",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "outDir": "./build",
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "types": ["node"],
+    "typeRoots": ["./src/types"],
+    "baseUrl": "./src",
+    "paths": {
+      "@input/*": ["app/Input/*"],
+      "@entity/*": ["app/Entity/*"],
+      "@resolver/*": ["app/Resolvers/*"],
+      "@service/*": ["app/Services/*"],
+      "@middleware/*": ["app/Middleware/*"],
+      "@notification/*": ["app/Notifications/*"]
+    }
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "**/*.test.ts"],
+  "files": ["node_modules/typescript/lib/lib.es6.d.ts"]
+}
