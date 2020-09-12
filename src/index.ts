@@ -7,8 +7,9 @@ import { buildSchema } from 'type-graphql';
 import { Resolvers } from '@resolver/index';
 import { customAuthChecker } from '@middleware/AuthMiddleware';
 import { SubscriptionServer } from 'subscriptions-transport-ws';
-import { execute, subscribe } from 'graphql';
+import { execute, subscribe, getOperationAST } from 'graphql';
 import { createServer } from 'http';
+import { graphqlUploadExpress } from 'graphql-upload';
 
 const startServer = async () => {
   await createConnection();
@@ -22,15 +23,21 @@ const startServer = async () => {
       const token = req.headers.authorization || '';
       return { token };
     },
+    // logger: ,
+    introspection: true,
+    debug: true,
+    uploads: false,
     subscriptions: {
       path: '/subscriptions',
       onConnect: (connectionParams, webSocket, context) => console.log('Connected to websocket'),
-      onDisconnect: (webSocket, context) => console.log('Discnnected to websocket')
+      onDisconnect: (webSocket, context) => console.log('Discnnected to websocket'),
+      // keepAlive: 
     }
   });
   const path = process.env.ROOT_PATH;
   const app = express();
-  apolloServer.applyMiddleware({ app, path });
+  app.use(graphqlUploadExpress({ maxFileSize: 10000000, maxFiles: 10 }));
+  apolloServer.applyMiddleware({ app, path, cors: false });
   const server = createServer(app);
   server.listen(process.env.PORT, () => {
     new SubscriptionServer({ execute, subscribe, schema }, { server: server, path: '/subscriptions' });
