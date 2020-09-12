@@ -46,6 +46,7 @@
       "sequelize": "^5.21.5",
       "sequelize-cli": "^5.5.1",
       "socket.io": "^2.3.0",
+      "subscriptions-transport-ws": "^0.9.18",
       "type-graphql": "^1.0.0-rc.3",
       "typeorm": "0.2.22"
    },
