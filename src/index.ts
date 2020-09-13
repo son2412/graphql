@@ -35,9 +35,10 @@ const startServer = async () => {
       // keepAlive:
     }
   });
-  const path = process.env.ROOT_PATH;
+  const path = process.env.ROOT_PATH || '/graphql';
   const app = express();
   app.use(bodyParser.json());
+  app.use('/upload', express.static('uploads'));
   // app.use(cors());
   app.post('/webhook', (req: express.Request, res: express.Response) => {
     console.log(req.body);
