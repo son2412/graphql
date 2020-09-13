@@ -10,6 +10,7 @@ import { SubscriptionServer } from 'subscriptions-transport-ws';
 import { execute, subscribe, getOperationAST } from 'graphql';
 import { createServer } from 'http';
 import { graphqlUploadExpress } from 'graphql-upload';
+import * as bodyParser from 'body-parser';
 
 const startServer = async () => {
   await createConnection();
@@ -30,12 +31,18 @@ const startServer = async () => {
     subscriptions: {
       path: '/subscriptions',
       onConnect: (connectionParams, webSocket, context) => console.log('Connected to websocket'),
-      onDisconnect: (webSocket, context) => console.log('Discnnected to websocket'),
-      // keepAlive: 
+      onDisconnect: (webSocket, context) => console.log('Discnnected to websocket')
+      // keepAlive:
     }
   });
   const path = process.env.ROOT_PATH;
   const app = express();
+  app.use(bodyParser.json());
+  // app.use(cors());
+  app.post('/webhook', (req: express.Request, res: express.Response) => {
+    console.log(req.body);
+    res.json({ test: 1 });
+  });
   app.use(graphqlUploadExpress({ maxFileSize: 10000000, maxFiles: 10 }));
   apolloServer.applyMiddleware({ app, path, cors: false });
   const server = createServer(app);
