@@ -7,7 +7,7 @@ import { buildSchema } from 'type-graphql';
 import { Resolvers } from '@resolver/index';
 import { customAuthChecker } from '@middleware/AuthMiddleware';
 import { SubscriptionServer } from 'subscriptions-transport-ws';
-import { execute, subscribe, getOperationAST } from 'graphql';
+import { execute, subscribe } from 'graphql';
 import { createServer } from 'http';
 import { graphqlUploadExpress } from 'graphql-upload';
 import * as bodyParser from 'body-parser';

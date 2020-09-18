@@ -1,14 +1,10 @@
-import { FileEntity } from '@entity/index';
 import { Resolver, Query, Arg, Mutation } from 'type-graphql';
 import { GraphQLUpload } from 'graphql-upload';
 import { Stream } from 'stream';
 import { createWriteStream } from 'fs';
 
 @Resolver()
-export class UploadResolver {
-  @Query(() => [FileEntity])
-  uploads() {}
-
+export class UploadServerResolver {
   @Mutation(() => Boolean)
   async singleUpload(
     @Arg('file', () => GraphQLUpload)

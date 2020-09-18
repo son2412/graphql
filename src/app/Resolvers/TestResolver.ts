@@ -1,4 +1,3 @@
-import { FileEntity } from '@entity/index';
 import { Resolver, Query, Arg, Mutation, Root, Subscription, PubSub, PubSubEngine, Publisher, ResolverFilterData } from 'type-graphql';
 import { Notification, NotificationPayload } from '@entity/index';
 

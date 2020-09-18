@@ -20,7 +20,8 @@
       "@resolver/*": ["app/Resolvers/*"],
       "@service/*": ["app/Services/*"],
       "@middleware/*": ["app/Middleware/*"],
-      "@notification/*": ["app/Notifications/*"]
+      "@notification/*": ["app/Notifications/*"],
+      "@namespace/*": ["app/Namespace/*"]
     }
   },
   "include": ["src/**/*"],

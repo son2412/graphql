@@ -1,5 +1,6 @@
 import { Field, ID, ObjectType } from 'type-graphql';
 import { User } from './User';
+import { ReadStream } from 'fs';
 
 @ObjectType()
 export class PaginateUser {
@@ -31,4 +32,34 @@ export class Notification {
 export interface NotificationPayload {
   id: number;
   message?: string;
+}
+
+@ObjectType()
+export class UploadedFileResponse {
+  @Field()
+  filename: string;
+
+  @Field({ nullable: true })
+  mimetype?: string;
+
+  @Field()
+  encoding: string;
+
+  @Field()
+  url: string;
+}
+
+@ObjectType()
+export class File {
+  @Field()
+  filename: string;
+
+  @Field({ nullable: true })
+  mimetype?: string;
+
+  @Field()
+  encoding?: string;
+
+  @Field()
+  stream?: ReadStream;
 }

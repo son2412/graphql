@@ -56,7 +56,8 @@
       "@input": "build/app/Input",
       "@service": "build/app/Services",
       "@middleware": "build/app/Middleware",
-      "@notification": "build/app/Notifications"
+      "@notification": "build/app/Notifications",
+      "@namespace": "build/app/Namespace"
    },
    "scripts": {
       "start": "tsc && nodemon --watch ./src --exec ts-node -r tsconfig-paths/register ./src/index.ts",
