@@ -34,8 +34,6 @@
       "jsonwebtoken": "^8.5.1",
       "lodash": "^4.17.15",
       "module-alias": "^2.2.2",
-      "multer": "^1.4.2",
-      "multer-s3": "^2.9.0",
       "mysql": "^2.14.1",
       "mysql2": "^2.1.0",
       "nexmo": "^2.6.0",
@@ -45,7 +43,6 @@
       "reflect-metadata": "^0.1.10",
       "sequelize": "^5.21.5",
       "sequelize-cli": "^5.5.1",
-      "socket.io": "^2.3.0",
       "subscriptions-transport-ws": "^0.9.18",
       "type-graphql": "^1.0.0-rc.3",
       "typeorm": "0.2.22"
@@ -60,11 +57,9 @@
       "@namespace": "build/app/Namespace"
    },
    "scripts": {
-      "start": "tsc && nodemon --watch ./src --exec ts-node -r tsconfig-paths/register ./src/index.ts",
       "dev": "tsc-watch --onSuccess \"nodemon ./build/index.js\"",
       "prod": "rm -rf build && tsc && nodemon build/index.js",
       "build": "tsc",
-      "ts": "nodemon src/index.ts",
       "migrate": "ts-node ./node_modules/typeorm/cli.js migration:run",
       "make:migration": "ts-node ./node_modules/typeorm/cli.js migration:create -n",
       "recreatedb": "ts-node ./node_modules/typeorm/cli.js schema:drop && npm run migrate",
