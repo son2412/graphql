@@ -1,0 +1,13 @@
+{
+    "apps": [
+        {
+            "name": "graphql api",
+            "script": "./build/index.js",
+            "watch": false,
+            "ignore_watch": [
+                "node_modules",
+                "logs"
+            ]
+        }
+    ]
+}
