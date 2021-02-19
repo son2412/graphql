@@ -21,4 +21,4 @@ jobs:
       - name: rsync over ssh
         run: |
           echo 'Starting to Deploy...'
-          ssh ubuntu@${{ secrets.KNOWN_HOSTS }} "pwd && ls"
+          ssh ubuntu@13.212.177.234 "pwd && ls"
