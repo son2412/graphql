@@ -18,7 +18,17 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           name: id_rsa
           known_hosts: ${{ secrets.KNOWN_HOSTS }}
-      - name: rsync over ssh
+      - name: Create SSH key
         run: |
-          echo 'Starting to Deploy...'
-          ssh ubuntu@13.212.177.234 "pwd && ls"
+          mkdir -p ~/.ssh/
+          echo "$SSH_PRIVATE_KEY" > ../id_rsa_test
+          sudo chmod 600 ../id_rsa_test
+          echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+        shell: bash
+        env:
+          SSH_PRIVATE_KEY: ${{secrets.SSH_KEY}}
+          SSH_KNOWN_HOSTS: ${{secrets.KNOWN_HOSTS}}
+      - name: SSH into DO and run
+        run: >
+          ssh -i ../id_rsa_test -tt ubuntu@13.212.177.234
+          "pwd && ls"
