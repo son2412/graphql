@@ -27,12 +27,12 @@ jobs:
           SSH_PRIVATE_KEY: ${{secrets.SSH_KEY}}
           SSH_KNOWN_HOSTS: ${{secrets.KNOWN_HOSTS}}
       - name: SSH into DO and run
-        run: ./deploy.sh
-        # run: >
-        #   rsync --progress -avzh --exclude='.git' -e "ssh -i ~/.ssh/id_rsa_test " --rsync-path="sudo rsync" . ubuntu@13.212.177.234:/home/ubuntu/new_graphql
-        #   ssh -i ../id_rsa_test -tt ubuntu@13.212.177.234
+        # run: ./deploy.sh
+        run: >
+          rsync --progress -avzh --exclude='.git' -e "ssh -i ~/.ssh/id_rsa_test " --rsync-path="sudo rsync" . ubuntu@13.212.177.234:/home/ubuntu/new_graphql
+          ssh -i ../id_rsa_test -tt ubuntu@13.212.177.234
         #   "sudo mv graphql tmp_graphql && sudo mv new_graphql graphql && sudo rm -rf tmp_graphql && cd graphql && npm install && npm run build && pm2 restart service.json"
-        shell: bash
+        # shell: bash
   docker:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master'
