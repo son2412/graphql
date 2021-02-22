@@ -1,14 +1,11 @@
 name: Test GraphQL
 
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+on: [ push, pull_request ]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -35,6 +32,7 @@ jobs:
           "pwd && ls"
   docker:
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/dev'
     steps:
       - name: Checkout
         uses: actions/checkout@v2

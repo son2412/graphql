@@ -7,7 +7,5 @@ COPY package*.json ./
 
 RUN npm cache clean --force && npm install
 
-RUN npm run build
-
 EXPOSE 3000
-CMD [ "npm", "run", "dev" ]
+CMD [ "npm", "run", "build", "&&" "npm", "run", "dev" ]
