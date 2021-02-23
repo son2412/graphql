@@ -28,7 +28,9 @@ jobs:
           SSH_KNOWN_HOSTS: ${{secrets.KNOWN_HOSTS}}
       - name: Create Enviroment
         run: |
-          echo {{secrets.ENV}} > .env
+          echo "$ENVIROMENT" > .env
+        env:
+          ENVIROMENT: ${{secrets.ENV}}
       - name: SSH into DO and run
         # run: ./deploy.sh
         run: >
