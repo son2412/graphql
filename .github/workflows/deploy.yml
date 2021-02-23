@@ -31,7 +31,7 @@ jobs:
         run: >
           rsync --progress -avzh --exclude='.git' -e "ssh -i ~/.ssh/id_rsa_test " --rsync-path="rsync" . ubuntu@13.212.177.234:/home/ubuntu/new_graphql
           && ssh -i ../id_rsa_test -tt ubuntu@13.212.177.234
-          "mv new_graphql graphql && cd graphql && npm install && npm run build && pm2 restart service.json"
+          "mv graphql tmp_graphql && mv new_graphql graphql && rm -rf tmp_graphql && cd graphql && ls"
         # shell: bash
   docker:
     runs-on: ubuntu-latest
