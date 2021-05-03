@@ -22,7 +22,7 @@ export class UserResolver {
   }
 
   @Query(() => User)
-  @Authorized()
+  @Authorized([])
   me(@Ctx() ctx: any) {
     const { user_id } = ctx;
     return User.findOne({ where: { user_id }, relations: ['roles'] });

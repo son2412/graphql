@@ -1,5 +1,5 @@
 import { PrimaryGeneratedColumn, Column, BaseEntity, Entity, ManyToMany, JoinTable } from 'typeorm';
-import { Field, ID, ObjectType } from 'type-graphql'
+import { Field, ID, ObjectType } from 'type-graphql';
 import { Role } from './Role';
 
 @Entity('users')

@@ -1,9 +1,11 @@
 export class Exception extends Error {
   errorCode: number;
-  constructor(message, errorCode?) {
+  errorText: string;
+  constructor(message: string, errorCode?: number, errorText?: string) {
     super(message);
     this.name = this.constructor.name;
     Error.captureStackTrace(this, this.constructor);
     this.errorCode = errorCode;
+    this.errorText = errorText;
   }
 }

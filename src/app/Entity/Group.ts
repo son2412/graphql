@@ -1,26 +1,26 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 import { Field, ID, ObjectType } from 'type-graphql';
 
-@Entity('images')
+@Entity('groups')
 @ObjectType()
-export class Image {
+export class Group {
   @Field(() => ID)
   @PrimaryGeneratedColumn()
   id: number;
 
   @Field(() => Number)
   @Column()
-  imageable_id: number;
+  creator_id: number;
 
   @Field(() => String)
   @Column()
-  imageable_type: number;
+  name: string;
 
   @Field(() => String)
   @Column()
-  url: string;
+  avatar: string;
 
-  @Field(() => String)
+  @Field(() => Number)
   @Column()
   type: number;
 

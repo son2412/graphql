@@ -1,28 +1,24 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 import { Field, ID, ObjectType } from 'type-graphql';
 
-@Entity('images')
+@Entity('devices')
 @ObjectType()
-export class Image {
+export class Device {
   @Field(() => ID)
   @PrimaryGeneratedColumn()
   id: number;
 
   @Field(() => Number)
   @Column()
-  imageable_id: number;
+  user_id: number;
 
   @Field(() => String)
   @Column()
-  imageable_type: number;
+  token: string;
 
   @Field(() => String)
   @Column()
-  url: string;
-
-  @Field(() => String)
-  @Column()
-  type: number;
+  platform: string;
 
   @Field(() => String)
   @Column()

@@ -16,7 +16,9 @@ const startServer = async () => {
   await createConnection();
   const schema = await buildSchema({
     resolvers: Resolvers,
-    authChecker: customAuthChecker
+    authChecker: customAuthChecker,
+    // authMode: null,
+    validate: false
   });
   const apolloServer = new ApolloServer({
     schema,

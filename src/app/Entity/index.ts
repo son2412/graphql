@@ -3,3 +3,6 @@ export * from './Role';
 export * from './Image';
 export * from './Auth';
 export * from './Common';
+export * from './Message';
+export * from './Group';
+export * from './Device';
