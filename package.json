@@ -54,7 +54,8 @@
       "@service": "build/app/Services",
       "@middleware": "build/app/Middleware",
       "@notification": "build/app/Notifications",
-      "@namespace": "build/app/Namespace"
+      "@namespace": "build/app/Namespace",
+      "@router": "build/routes"
    },
    "scripts": {
       "dev": "tsc-watch --onSuccess \"nodemon ./build/index.js\"",

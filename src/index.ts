@@ -11,6 +11,7 @@ import { execute, subscribe } from 'graphql';
 import { createServer } from 'http';
 import { graphqlUploadExpress } from 'graphql-upload';
 import * as bodyParser from 'body-parser';
+import routes from '@router/index';
 
 const startServer = async () => {
   await createConnection();
@@ -42,10 +43,8 @@ const startServer = async () => {
   app.use(bodyParser.json());
   app.use('/upload', express.static('uploads'));
   // app.use(cors());
-  app.post('/webhook', (req: express.Request, res: express.Response) => {
-    console.log(req.body);
-    res.json({ test: 1 });
-  });
+  app.post('/webhook', (req: express.Request, res: express.Response) => {});
+  app.use('/', routes);
   app.use(graphqlUploadExpress({ maxFileSize: 10000000, maxFiles: 10 }));
   apolloServer.applyMiddleware({ app, path, cors: false });
   const server = createServer(app);

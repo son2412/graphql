@@ -21,7 +21,8 @@
       "@service/*": ["app/Services/*"],
       "@middleware/*": ["app/Middleware/*"],
       "@notification/*": ["app/Notifications/*"],
-      "@namespace/*": ["app/Namespace/*"]
+      "@namespace/*": ["app/Namespace/*"],
+      "@router/*": ["routes/*"]
     }
   },
   "include": ["src/**/*"],
