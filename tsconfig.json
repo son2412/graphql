@@ -22,6 +22,7 @@
       "@middleware/*": ["app/Middleware/*"],
       "@notification/*": ["app/Notifications/*"],
       "@namespace/*": ["app/Namespace/*"],
+      "@schema/*": ["app/Schema/*"],
       "@router/*": ["routes/*"]
     }
   },

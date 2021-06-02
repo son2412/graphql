@@ -1,8 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
-import { Field, ID, ObjectType } from 'type-graphql';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { Field, ID } from 'type-graphql';
 
 @Entity('devices')
-@ObjectType()
 export class Device {
   @Field(() => ID)
   @PrimaryGeneratedColumn()
@@ -26,9 +25,11 @@ export class Device {
 
   @Field(() => String)
   @Column()
+  @CreateDateColumn()
   created_at: Date;
 
   @Field(() => String)
   @Column()
+  @UpdateDateColumn()
   updated_at: Date;
 }

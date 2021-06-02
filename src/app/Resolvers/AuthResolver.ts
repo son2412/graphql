@@ -1,12 +1,13 @@
-import { User, AuthEntity } from '@entity/index';
+import { User } from '@entity/index';
 import { Exception } from '@service/Exception';
-import { Resolver, Query, Arg, Mutation } from 'type-graphql';
+import { Resolver, Arg, Mutation } from 'type-graphql';
 import { CreateUserInput } from '@input/CreateUserInput';
 import { Auth } from '@service/Auth';
+import { AuthSchema } from '@schema/AuthSchema';
 
 @Resolver()
 export class AuthResolver {
-  @Mutation(() => AuthEntity)
+  @Mutation(() => AuthSchema)
   async signIn(@Arg('email') email: string, @Arg('password') password: string) {
     const user = await User.findOne({ where: { email: email } });
     if (!user) throw new Exception('User not found!');
@@ -17,7 +18,7 @@ export class AuthResolver {
     return { token: Auth.generateToken(user), user: user };
   }
 
-  @Mutation(() => AuthEntity)
+  @Mutation(() => AuthSchema)
   async signUp(@Arg('data') data: CreateUserInput) {
     const user = await User.findOne({ where: { email: data.email } });
     if (user) throw new Exception('User is existing !');

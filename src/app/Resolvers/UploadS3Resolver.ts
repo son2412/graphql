@@ -2,7 +2,7 @@ import { Resolver, Query, Arg, Mutation } from 'type-graphql';
 import * as AWS from 'aws-sdk';
 import * as stream from 'stream';
 import { ApolloServerFileUploads } from '@namespace/ApolloServerFileUploads';
-import { UploadedFileResponse, File } from '@entity/Common';
+import { UploadedFileResponse, File } from '@schema/Common';
 import { GraphQLUpload } from 'graphql-upload';
 /**
  * github: https://github.com/stemmlerjs/apollo-cloud-file-uploads

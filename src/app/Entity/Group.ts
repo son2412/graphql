@@ -1,9 +1,8 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
-import { Field, ID, ObjectType } from 'type-graphql';
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { Field, ID } from 'type-graphql';
 
 @Entity('groups')
-@ObjectType()
-export class Group {
+export class Group extends BaseEntity {
   @Field(() => ID)
   @PrimaryGeneratedColumn()
   id: number;
@@ -30,9 +29,11 @@ export class Group {
 
   @Field(() => String)
   @Column()
+  @CreateDateColumn()
   created_at: Date;
 
   @Field(() => String)
   @Column()
+  @UpdateDateColumn()
   updated_at: Date;
 }

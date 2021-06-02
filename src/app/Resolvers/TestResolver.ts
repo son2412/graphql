@@ -1,5 +1,5 @@
 import { Resolver, Query, Arg, Mutation, Root, Subscription, PubSub, PubSubEngine, Publisher, ResolverFilterData } from 'type-graphql';
-import { Notification, NotificationPayload } from '@entity/index';
+import { Notification, NotificationPayload } from '@schema/index';
 
 @Resolver()
 export class TestResolver {

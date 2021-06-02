@@ -18,7 +18,7 @@ export const customAuthChecker = async ({ root, args, context, info }, roles = [
     throw new Exception('Permission Denied!', 403, 'PermissionDenied');
   }
   const user_id = decoded.data.id;
-  const user = await User.findOne({ where: { user_id }, relations: ['roles'] });
+  const user = await User.findOne({ where: { id: user_id }, relations: ['roles'] });
   context.user_id = user_id;
   context.user = user;
   if (roles.length && roles.includes('ADMIN')) {

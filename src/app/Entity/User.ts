@@ -1,9 +1,8 @@
-import { PrimaryGeneratedColumn, Column, BaseEntity, Entity, ManyToMany, JoinTable } from 'typeorm';
-import { Field, ID, ObjectType } from 'type-graphql';
+import { PrimaryGeneratedColumn, Column, BaseEntity, Entity, ManyToMany, JoinTable, UpdateDateColumn, CreateDateColumn } from 'typeorm';
+import { Field, ID } from 'type-graphql';
 import { Role } from './Role';
 
 @Entity('users')
-@ObjectType()
 export class User extends BaseEntity {
   @Field(() => ID)
   @PrimaryGeneratedColumn()
@@ -47,10 +46,12 @@ export class User extends BaseEntity {
 
   @Field(() => String)
   @Column()
+  @CreateDateColumn()
   created_at: Date;
 
   @Field(() => String)
   @Column()
+  @UpdateDateColumn()
   updated_at: Date;
 
   @ManyToMany(() => Role)

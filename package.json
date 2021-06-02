@@ -55,6 +55,7 @@
       "@middleware": "build/app/Middleware",
       "@notification": "build/app/Notifications",
       "@namespace": "build/app/Namespace",
+      "@schema": "build/app/Schema",
       "@router": "build/routes"
    },
    "scripts": {
