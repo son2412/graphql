@@ -1,27 +1,20 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, BaseEntity } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, CreateDateColumn, UpdateDateColumn, ManyToOne, JoinColumn } from 'typeorm';
 import { Field, ID } from 'type-graphql';
+import { Group } from './Group';
 
-@Entity('messages')
-export class Message extends BaseEntity {
+@Entity('user_group')
+export class UserGroup {
   @Field(() => ID)
   @PrimaryGeneratedColumn()
   id: number;
 
   @Field(() => Number)
   @Column()
-  sender_id: number;
+  user_id: number;
 
   @Field(() => Number)
   @Column()
   group_id: number;
-
-  @Field(() => String)
-  @Column()
-  message: string;
-
-  @Field(() => Number)
-  @Column()
-  type: number;
 
   @Field(() => String)
   @Column()
@@ -36,4 +29,8 @@ export class Message extends BaseEntity {
   @Column()
   @UpdateDateColumn()
   updated_at: Date;
+
+  @ManyToOne(() => Group)
+  @JoinColumn({ name: 'group_id', referencedColumnName: 'id' })
+  group: Group;
 }

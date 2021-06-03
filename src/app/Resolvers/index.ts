@@ -5,5 +5,14 @@ import { TestResolver } from './TestResolver';
 import { UploadServerResolver } from './UploadServerResolver';
 import { UploadS3Resolver } from './UploadS3Resolver';
 import { GroupResolver } from './GroupResolver';
+import { MessageResolver } from './MessageResolver';
 
-export const Resolvers: NonEmptyArray<Function> = [UserResolver, AuthResolver, TestResolver, UploadServerResolver, UploadS3Resolver, GroupResolver];
+export const Resolvers: NonEmptyArray<Function> = [
+  UserResolver,
+  AuthResolver,
+  TestResolver,
+  UploadServerResolver,
+  UploadS3Resolver,
+  GroupResolver,
+  MessageResolver
+];

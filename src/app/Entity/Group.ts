@@ -1,5 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, CreateDateColumn, UpdateDateColumn, ManyToMany, JoinTable, OneToMany } from 'typeorm';
 import { Field, ID } from 'type-graphql';
+import { User } from './User';
+import { UserGroup } from './UserGroup';
 
 @Entity('groups')
 export class Group extends BaseEntity {
@@ -36,4 +38,25 @@ export class Group extends BaseEntity {
   @Column()
   @UpdateDateColumn()
   updated_at: Date;
+
+  @ManyToMany(() => User)
+  @JoinTable({
+    name: 'user_group',
+    joinColumn: {
+      name: 'group_id',
+      referencedColumnName: 'id'
+    },
+    inverseJoinColumn: {
+      name: 'user_id',
+      referencedColumnName: 'id'
+    }
+  })
+  @Field(() => [User])
+  users: User[];
+
+  @OneToMany(
+    () => UserGroup,
+    ug => ug.group
+  )
+  user_group: UserGroup[];
 }

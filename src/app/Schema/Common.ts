@@ -21,7 +21,7 @@ export class PaginateUser {
 @ObjectType()
 export class Notification {
   @Field((type) => ID)
-  id: number;
+  id?: number;
 
   @Field({ nullable: true })
   message?: string;
@@ -31,7 +31,7 @@ export class Notification {
 }
 
 export interface NotificationPayload {
-  id: number;
+  id?: number;
   message?: string;
 }
 

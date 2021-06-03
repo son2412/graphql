@@ -1,6 +1,7 @@
 import { PrimaryGeneratedColumn, Column, BaseEntity, Entity, ManyToMany, JoinTable, UpdateDateColumn, CreateDateColumn } from 'typeorm';
 import { Field, ID } from 'type-graphql';
 import { Role } from './Role';
+import { Group } from './Group';
 
 @Entity('users')
 export class User extends BaseEntity {
@@ -68,4 +69,19 @@ export class User extends BaseEntity {
   })
   @Field(() => [Role])
   roles: Role[];
+
+  @ManyToMany(() => Group)
+  @JoinTable({
+    name: 'user_group',
+    joinColumn: {
+      name: 'user_id',
+      referencedColumnName: 'id'
+    },
+    inverseJoinColumn: {
+      name: 'group_id',
+      referencedColumnName: 'id'
+    }
+  })
+  @Field(() => [Group])
+  groups: Group[];
 }

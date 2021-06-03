@@ -1,4 +1,7 @@
+import { UserGroup } from '@entity/UserGroup';
 import { Field, ID, ObjectType } from 'type-graphql';
+import { UserGroupSchema } from './UserGroupSchema';
+import { UserSchema } from './UserSchema';
 
 @ObjectType()
 export class GroupSchema {
@@ -25,4 +28,10 @@ export class GroupSchema {
 
   @Field(() => String)
   updated_at: Date;
+
+  @Field(() => [UserSchema])
+  users: UserSchema[];
+
+  @Field(() => [UserGroupSchema])
+  user_group: UserGroup[];
 }

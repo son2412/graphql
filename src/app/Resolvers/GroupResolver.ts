@@ -13,8 +13,13 @@ export class GroupResolver {
     const { user } = ctx;
     const pageSize = data.pageSize || 10;
     const pageIndex = data.pageIndex || 1;
-    // const groups = 
-    const groups = await Group.findAndCount({ take: pageSize, skip: (pageIndex - 1) * pageSize });
+    const groups = await Group.createQueryBuilder('group')
+      .leftJoinAndSelect('group.users', 'users')
+      .leftJoinAndSelect('group.user_group', 'user_group')
+      .where('user_group.user_id = :user_id', { user_id: user.id })
+      .take(pageSize)
+      .skip((pageIndex - 1) * pageSize)
+      .getManyAndCount();
     return { data: groups[0], totalRow: groups[1], totalPage: Math.ceil(groups[1] / pageSize), currentPage: pageIndex, perPage: pageSize };
   }
 }

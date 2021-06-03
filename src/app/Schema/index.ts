@@ -6,3 +6,4 @@ export * from './Common';
 export * from './MessageSchema';
 export * from './GroupSchema';
 export * from './DeviceSchema';
+export * from './UserGroupSchema';
