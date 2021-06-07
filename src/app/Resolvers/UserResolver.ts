@@ -55,7 +55,7 @@ export class UserResolver {
   @Mutation(() => Boolean)
   async deleteUser(@Arg('id') id: number) {
     const user = await User.findOne({ where: { id } });
-    if (!user) throw new Exception('User not found!');
+    if (!user) throw new Exception('User not found!', 404);
     await user.remove();
     return true;
   }

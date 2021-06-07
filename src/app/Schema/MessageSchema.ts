@@ -1,4 +1,5 @@
 import { Field, ID, ObjectType } from 'type-graphql';
+import { UserSchema } from './UserSchema';
 
 @ObjectType()
 export class MessageSchema {
@@ -25,4 +26,7 @@ export class MessageSchema {
 
   @Field(() => Date)
   updated_at?: Date;
+
+  @Field(() => UserSchema)
+  sender?: UserSchema;
 }

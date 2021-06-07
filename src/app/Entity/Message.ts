@@ -1,5 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, BaseEntity } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, BaseEntity, ManyToOne, JoinColumn } from 'typeorm';
 import { Field, ID } from 'type-graphql';
+import { User } from './User';
 
 @Entity('messages')
 export class Message extends BaseEntity {
@@ -36,4 +37,8 @@ export class Message extends BaseEntity {
   @Column()
   @UpdateDateColumn()
   updated_at: Date;
+
+  @ManyToOne(() => User)
+  @JoinColumn({ name: 'sender_id', referencedColumnName: 'id' })
+  sender: User;
 }

@@ -2,6 +2,7 @@ import { Field, ID, ObjectType } from 'type-graphql';
 import { UserSchema } from './UserSchema';
 import { ReadStream } from 'fs';
 import { GroupSchema } from './GroupSchema';
+import { MessageSchema } from './MessageSchema';
 
 @ObjectType()
 export class PaginateUser {
@@ -69,6 +70,21 @@ export class File {
 export class PaginateGroup {
   @Field(() => [GroupSchema])
   data: [GroupSchema];
+
+  @Field(() => Number)
+  totalRow: number;
+
+  @Field(() => Number)
+  totalPage: number;
+
+  @Field(() => Number)
+  currentPage: number;
+}
+
+@ObjectType()
+export class PaginateMessage {
+  @Field(() => [MessageSchema])
+  data: [MessageSchema];
 
   @Field(() => Number)
   totalRow: number;

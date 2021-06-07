@@ -54,9 +54,6 @@ export class Group extends BaseEntity {
   @Field(() => [User])
   users: User[];
 
-  @OneToMany(
-    () => UserGroup,
-    ug => ug.group
-  )
+  @OneToMany(() => UserGroup, (ug) => ug.group)
   user_group: UserGroup[];
 }

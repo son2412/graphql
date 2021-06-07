@@ -1,7 +1,8 @@
-import { PrimaryGeneratedColumn, Column, BaseEntity, Entity, ManyToMany, JoinTable, UpdateDateColumn, CreateDateColumn } from 'typeorm';
+import { PrimaryGeneratedColumn, Column, BaseEntity, Entity, ManyToMany, JoinTable, UpdateDateColumn, CreateDateColumn, OneToMany } from 'typeorm';
 import { Field, ID } from 'type-graphql';
 import { Role } from './Role';
 import { Group } from './Group';
+import { Message } from './Message';
 
 @Entity('users')
 export class User extends BaseEntity {
@@ -84,4 +85,7 @@ export class User extends BaseEntity {
   })
   @Field(() => [Group])
   groups: Group[];
+
+  @OneToMany(() => Message, (m) => m.sender)
+  messages: Message[];
 }
