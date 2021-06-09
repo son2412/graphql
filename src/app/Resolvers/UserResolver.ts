@@ -26,35 +26,35 @@ export class UserResolver {
 
   @Query(() => UserSchema)
   user(@Arg('id') id: number) {
-    return User.findOne({ where: { id }, relations: ['roles'] });
+    return User.findOne({ where: { id, deleted_at: IsNull() }, relations: ['roles'] });
   }
 
   @Query(() => UserSchema)
   @Authorized([])
   me(@Ctx() ctx: IContext.ICtx) {
     const { user_id } = ctx;
-    return User.findOne({ where: { user_id }, relations: ['roles'] });
+    return User.findOne({ where: { id: user_id, deleted_at: IsNull() }, relations: ['roles'] });
   }
 
-  @Mutation(() => UserSchema)
+  @Mutation(() => Boolean)
   async createUser(@Arg('data') data: CreateUserInput) {
     const user = User.create(data);
     await user.save();
-    return user;
+    return true;
   }
 
-  @Mutation(() => UserSchema)
+  @Mutation(() => Boolean)
   async updateUser(@Arg('id') id: number, @Arg('data') data?: UpdateUserInput) {
     const user = await User.findOne({ where: { id } });
     if (!user) throw new Exception('User not found!');
     Object.assign(user, data);
     await user.save();
-    return user;
+    return true;
   }
 
   @Mutation(() => Boolean)
   async deleteUser(@Arg('id') id: number) {
-    const user = await User.findOne({ where: { id } });
+    const user = await User.findOne({ where: { id, deleted_at: IsNull() } });
     if (!user) throw new Exception('User not found!', 404);
     await user.remove();
     return true;
