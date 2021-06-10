@@ -5,6 +5,7 @@ import { ParamInput } from '@input/ParamInput';
 import { IContext } from '@namespace/IContext';
 import { PaginateMessage } from '@schema/Common';
 import { MessageSchema } from '@schema/MessageSchema';
+import { UserSchema } from '@schema/UserSchema';
 import { Exception } from '@service/Exception';
 import { Resolver, Query, Arg, Mutation, Authorized, Ctx, PubSub, PubSubEngine, Subscription, Root } from 'type-graphql';
 import { IsNull } from 'typeorm';
@@ -17,6 +18,7 @@ export interface MessagePayload {
   message?: string;
   created_at?: Date;
   updated_at?: Date;
+  sender?: UserSchema;
 }
 @Resolver()
 export class MessageResolver {
@@ -31,16 +33,16 @@ export class MessageResolver {
     const result = await message.save();
     Object.assign(group, { message_id: result.id });
     await group.save();
-    process.nextTick(async () => await pubSub.publish(`${data.group_id}`, result));
+    process.nextTick(async () => await pubSub.publish(`${data.group_id}`, { ...result, ...{ sender: { id: user.id, avatar: user.avatar } } }));
     return true;
   }
 
   @Subscription({ topics: ({ args }) => args.topic })
   subscriptionMessageToDynamicTopic(
     @Arg('topic') topic: string,
-    @Root() { id, sender_id, group_id, type, message, created_at, updated_at }: MessagePayload
+    @Root() { id, sender_id, group_id, type, message, created_at, updated_at, sender }: MessagePayload
   ): MessageSchema {
-    return { id, sender_id, group_id, type, message, created_at, updated_at };
+    return { id, sender_id, group_id, type, message, created_at, updated_at, sender };
   }
 
   @Query(() => PaginateMessage)
