@@ -11,6 +11,9 @@ export class CreateUserInput {
   @Field({ nullable: false })
   email: string;
 
+  @Field({ nullable: true })
+  avatar: string;
+
   @Field({ nullable: false })
   phone: string;
 

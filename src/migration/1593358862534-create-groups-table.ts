@@ -18,6 +18,11 @@ export class createGroupsTable1593358862534 implements MigrationInterface {
             type: 'int'
           },
           {
+            name: 'message_id',
+            type: 'int',
+            isNullable: true
+          },
+          {
             name: 'name',
             type: 'text',
             isNullable: true

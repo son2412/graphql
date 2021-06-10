@@ -1,7 +1,20 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, CreateDateColumn, UpdateDateColumn, ManyToMany, JoinTable, OneToMany } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  BaseEntity,
+  CreateDateColumn,
+  UpdateDateColumn,
+  ManyToMany,
+  JoinTable,
+  OneToMany,
+  OneToOne,
+  JoinColumn
+} from 'typeorm';
 import { Field, ID } from 'type-graphql';
 import { User } from './User';
 import { UserGroup } from './UserGroup';
+import { Message } from './Message';
 
 @Entity('groups')
 export class Group extends BaseEntity {
@@ -12,6 +25,10 @@ export class Group extends BaseEntity {
   @Field(() => Number)
   @Column()
   creator_id: number;
+
+  @Field(() => Number)
+  @Column()
+  message_id: number;
 
   @Field(() => String)
   @Column()
@@ -56,4 +73,8 @@ export class Group extends BaseEntity {
 
   @OneToMany(() => UserGroup, (ug) => ug.group)
   user_group: UserGroup[];
+
+  @OneToOne(() => Message)
+  @JoinColumn({ name: 'message_id', referencedColumnName: 'id' })
+  message: Message;
 }

@@ -1,3 +1,4 @@
+import { Group } from '@entity/Group';
 import { Message } from '@entity/Message';
 import { CreateMessageInput } from '@input/CreateMessageInput';
 import { ParamInput } from '@input/ParamInput';
@@ -23,9 +24,13 @@ export class MessageResolver {
   @Authorized(['USER'])
   async message(@PubSub() pubSub: PubSubEngine, @Arg('data') data: CreateMessageInput, @Ctx() ctx: IContext.ICtx): Promise<boolean> {
     const { user } = ctx;
+    const group = await Group.findOne({ id: data.group_id, deleted_at: IsNull() });
+    if (!group) throw new Exception('Group Not Found!', 404, 'GroupNotFound');
     data = { ...data, ...{ sender_id: user.id } };
     const message = Message.create(data);
     const result = await message.save();
+    Object.assign(group, { message_id: result.id });
+    await group.save();
     process.nextTick(async () => await pubSub.publish(`${data.group_id}`, result));
     return true;
   }

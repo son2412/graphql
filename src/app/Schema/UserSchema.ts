@@ -16,6 +16,9 @@ export class UserSchema {
   email: string;
 
   @Field(() => String)
+  avatar: string;
+
+  @Field(() => String)
   phone: string;
 
   @Field(() => String)

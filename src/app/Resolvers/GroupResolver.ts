@@ -17,6 +17,7 @@ export class GroupResolver {
     const groups = await Group.createQueryBuilder('group')
       .leftJoinAndSelect('group.users', 'users')
       .leftJoinAndSelect('group.user_group', 'user_group')
+      .leftJoinAndSelect('group.message', 'message')
       .where('user_group.user_id = :user_id', { user_id: user.id })
       .take(pageSize)
       .skip((pageIndex - 1) * pageSize)

@@ -1,5 +1,6 @@
 import { UserGroup } from '@entity/UserGroup';
 import { Field, ID, ObjectType } from 'type-graphql';
+import { MessageSchema } from './MessageSchema';
 import { UserGroupSchema } from './UserGroupSchema';
 import { UserSchema } from './UserSchema';
 
@@ -10,6 +11,9 @@ export class GroupSchema {
 
   @Field(() => Number)
   creator_id: number;
+
+  @Field(() => Number, { nullable: true })
+  message_id: number;
 
   @Field(() => String)
   name: string;
@@ -34,4 +38,7 @@ export class GroupSchema {
 
   @Field(() => [UserGroupSchema])
   user_group: UserGroup[];
+
+  @Field(() => MessageSchema, { nullable: true })
+  message: MessageSchema;
 }

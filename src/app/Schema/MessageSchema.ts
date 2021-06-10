@@ -3,7 +3,7 @@ import { UserSchema } from './UserSchema';
 
 @ObjectType()
 export class MessageSchema {
-  @Field(() => ID)
+  @Field(() => ID, {nullable: true})
   id?: number;
 
   @Field(() => Number)
