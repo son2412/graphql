@@ -60,7 +60,7 @@
    },
    "scripts": {
       "dev": "tsc-watch --onSuccess \"nodemon ./build/index.js\"",
-      "prod": "rm -rf build && tsc && nodemon build/index.js",
+      "build:prod": "node --max-old-space-size=8192 node_modules/typescript/bin/tsc",
       "build": "tsc",
       "migrate": "ts-node ./node_modules/typeorm/cli.js migration:run",
       "make:migration": "ts-node ./node_modules/typeorm/cli.js migration:create -n",
