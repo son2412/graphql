@@ -32,7 +32,7 @@ export class User extends BaseEntity {
 
   @Field(() => String)
   @Column()
-  birth: string;
+  birthday: string;
 
   @Field(() => Number)
   @Column()
@@ -41,6 +41,14 @@ export class User extends BaseEntity {
   @Field(() => String)
   @Column()
   password: string;
+
+  @Field(() => String)
+  @Column()
+  social_id: string;
+
+  @Field(() => Number)
+  @Column()
+  login_type: number;
 
   @Field(() => Number)
   @Column()

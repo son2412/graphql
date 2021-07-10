@@ -18,7 +18,7 @@ export class CreateUserInput {
   phone: string;
 
   @Field({ nullable: false })
-  birth: string;
+  birthday: string;
 
   @Field({ nullable: false })
   gender: number;

@@ -18,7 +18,7 @@ export class UpdateUserInput {
   phone: string;
 
   @Field({ nullable: true })
-  birth: string;
+  birthday: string;
 
   @Field({ nullable: true })
   gender: number;

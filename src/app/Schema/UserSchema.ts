@@ -22,7 +22,7 @@ export class UserSchema {
   phone: string;
 
   @Field(() => String)
-  birth: string;
+  birthday: string;
 
   @Field(() => Number)
   gender: number;
