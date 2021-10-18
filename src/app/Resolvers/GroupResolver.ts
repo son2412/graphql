@@ -3,6 +3,7 @@ import { ParamInput } from '@input/ParamInput';
 import { IContext } from '@namespace/IContext';
 import { PaginateGroup } from '@schema/Common';
 import { GroupSchema } from '@schema/GroupSchema';
+import { Agora, PUBLISHER } from '@service/Agora';
 import { Exception } from '@service/Exception';
 import { Resolver, Query, Arg, Mutation, Authorized, Ctx } from 'type-graphql';
 
@@ -30,6 +31,17 @@ export class GroupResolver {
   async group(@Arg('id') id: number) {
     const group = await Group.createQueryBuilder('group').leftJoinAndSelect('group.users', 'users').where('group.id = :id', { id }).getOne();
     if (!group) throw new Exception('Group Not Found!', 404, 'GroupNotFound');
+    return group;
+  }
+
+  @Mutation(() => GroupSchema)
+  @Authorized(['USER'])
+  async makeToken(@Arg('id') id: number) {
+    const group = await Group.createQueryBuilder('group').where('group.id = :id', { id }).getOne();
+    if (!group) throw new Exception('Group Not Found!', 404, 'GroupNotFound');
+    const token = Agora.generateToken({ chanelName: `${id}`, role: PUBLISHER });
+    group.token = token;
+    await group.save();
     return group;
   }
 }

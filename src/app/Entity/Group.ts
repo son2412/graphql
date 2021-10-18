@@ -38,6 +38,10 @@ export class Group extends BaseEntity {
   @Column()
   avatar: string;
 
+  @Field(() => String)
+  @Column()
+  token: string;
+
   @Field(() => Number)
   @Column()
   type: number;

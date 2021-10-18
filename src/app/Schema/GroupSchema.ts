@@ -15,11 +15,14 @@ export class GroupSchema {
   @Field(() => Number, { nullable: true })
   message_id: number;
 
-  @Field(() => String)
+  @Field(() => String, { nullable: true })
   name: string;
 
-  @Field(() => String)
+  @Field(() => String, { nullable: true })
   avatar: string;
+
+  @Field(() => String, { nullable: true })
+  token: string;
 
   @Field(() => Number)
   type: number;
