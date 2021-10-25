@@ -105,7 +105,7 @@ export class FileStorage {
       fileFilter: (req, file, cb) => {
         const extension = file.mimetype.split('/')[0];
         if (this.type.indexOf(extension) === -1) {
-          return cb(new Error('type not accepted'), false);
+          return cb(new Error('Type not accepted'), false);
         }
         cb(null, true);
       }
