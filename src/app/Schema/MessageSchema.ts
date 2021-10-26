@@ -18,6 +18,9 @@ export class MessageSchema {
   @Field(() => Number)
   type?: number;
 
+  @Field(() => Boolean)
+  sent?: boolean;
+
   @Field(() => Date)
   deleted_at?: Date;
 

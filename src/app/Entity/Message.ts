@@ -21,6 +21,10 @@ export class Message extends BaseEntity {
   @Column()
   message: string;
 
+  @Field(() => Boolean)
+  @Column()
+  sent: boolean;
+
   @Field(() => Number)
   @Column()
   type: number;

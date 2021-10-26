@@ -7,7 +7,7 @@ import { PaginateMessage } from '@schema/Common';
 import { MessageSchema } from '@schema/MessageSchema';
 import { UserSchema } from '@schema/UserSchema';
 import { Exception } from '@service/Exception';
-import { Resolver, Query, Arg, Mutation, Authorized, Ctx, PubSub, PubSubEngine, Subscription, Root } from 'type-graphql';
+import { Resolver, Query, Arg, Mutation, Authorized, Ctx, PubSub, PubSubEngine, Subscription, Root, ID } from 'type-graphql';
 import { IsNull } from 'typeorm';
 
 export interface MessagePayload {
@@ -16,6 +16,7 @@ export interface MessagePayload {
   group_id?: number;
   type?: number;
   message?: string;
+  sent?: boolean;
   created_at?: Date;
   updated_at?: Date;
   sender?: UserSchema;
@@ -26,23 +27,30 @@ export class MessageResolver {
   @Authorized(['USER'])
   async message(@PubSub() pubSub: PubSubEngine, @Arg('data') data: CreateMessageInput, @Ctx() ctx: IContext.ICtx): Promise<boolean> {
     const { user } = ctx;
-    const group = await Group.findOne({ id: data.group_id, deleted_at: IsNull() });
+    const group = await Group.findOne({ where: { id: data.group_id, deleted_at: IsNull() }, relations: ['users'] });
     if (!group) throw new Exception('Group Not Found!', 404, 'GroupNotFound');
-    data = { ...data, ...{ sender_id: user.id } };
+    data = { ...data, ...{ sender_id: user.id, sent: true } };
     const message = Message.create(data);
     const result = await message.save();
     Object.assign(group, { message_id: result.id });
     await group.save();
-    process.nextTick(async () => await pubSub.publish(`${data.group_id}`, { ...result, ...{ sender: { id: user.id, avatar: user.avatar } } }));
+    const userIds = group.users.map((user) => user.id).filter((userId) => userId !== user.id);
+    process.nextTick(
+      async () =>
+        await Promise.all([
+          pubSub.publish(`group-${data.group_id}`, { ...result, ...{ sender: { id: user.id, avatar: user.avatar } } }),
+          userIds.map((id) => pubSub.publish(`user-${id}`, { ...result, ...{ sender: { id: user.id, avatar: user.avatar } } }))
+        ])
+    );
     return true;
   }
 
   @Subscription({ topics: ({ args }) => args.topic })
   subscriptionMessageToDynamicTopic(
     @Arg('topic') topic: string,
-    @Root() { id, sender_id, group_id, type, message, created_at, updated_at, sender }: MessagePayload
+    @Root() { id, sender_id, group_id, type, message, sent, created_at, updated_at, sender }: MessagePayload
   ): MessageSchema {
-    return { id, sender_id, group_id, type, message, created_at, updated_at, sender };
+    return { id, sender_id, group_id, type, message, sent, created_at, updated_at, sender };
   }
 
   @Query(() => PaginateMessage)
