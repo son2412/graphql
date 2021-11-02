@@ -6,7 +6,7 @@ import { IContext } from '@namespace/IContext';
 import { PaginateMessage } from '@schema/Common';
 import { MessageSchema } from '@schema/MessageSchema';
 import { UserSchema } from '@schema/UserSchema';
-import { Exception } from '@service/Exception';
+import { Exception } from '@util/Exception';
 import { Resolver, Query, Arg, Mutation, Authorized, Ctx, PubSub, PubSubEngine, Subscription, Root, ID } from 'type-graphql';
 import { IsNull } from 'typeorm';
 

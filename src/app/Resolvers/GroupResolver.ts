@@ -3,8 +3,8 @@ import { ParamInput } from '@input/ParamInput';
 import { IContext } from '@namespace/IContext';
 import { PaginateGroup } from '@schema/Common';
 import { GroupSchema } from '@schema/GroupSchema';
-import { Agora, PUBLISHER } from '@service/Agora';
-import { Exception } from '@service/Exception';
+import { Agora, PUBLISHER } from '@util/Agora';
+import { Exception } from '@util/Exception';
 import { Resolver, Query, Arg, Mutation, Authorized, Ctx } from 'type-graphql';
 
 @Resolver()

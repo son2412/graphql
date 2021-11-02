@@ -1,5 +1,5 @@
 import { User } from '@entity/index';
-import { Exception } from '@service/Exception';
+import { Exception } from '@util/Exception';
 import { Resolver, Query, Arg, Mutation, Authorized, Ctx } from 'type-graphql';
 import { CreateUserInput } from '@input/CreateUserInput';
 import { UpdateUserInput } from '@input/UpdateUserInput';

@@ -52,12 +52,13 @@
       "@entity": "build/app/Entity",
       "@resolver": "build/app/Resolvers",
       "@input": "build/app/Input",
-      "@service": "build/app/Services",
+      "@util": "build/app/Utilities",
       "@middleware": "build/app/Middleware",
       "@notification": "build/app/Notifications",
       "@namespace": "build/app/Namespace",
       "@schema": "build/app/Schema",
-      "@router": "build/routes"
+      "@router": "build/routes",
+      "@repository": "build/app/Repositories"
    },
    "scripts": {
       "dev": "tsc-watch --onSuccess \"nodemon ./build/index.js\"",

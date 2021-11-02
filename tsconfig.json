@@ -18,12 +18,13 @@
       "@input/*": ["app/Input/*"],
       "@entity/*": ["app/Entity/*"],
       "@resolver/*": ["app/Resolvers/*"],
-      "@service/*": ["app/Services/*"],
+      "@util/*": ["app/Utilities/*"],
       "@middleware/*": ["app/Middleware/*"],
       "@notification/*": ["app/Notifications/*"],
       "@namespace/*": ["app/Namespace/*"],
       "@schema/*": ["app/Schema/*"],
-      "@router/*": ["routes/*"]
+      "@router/*": ["routes/*"],
+      "@repository": ["app/Repositories/*"]
     }
   },
   "include": ["src/**/*"],

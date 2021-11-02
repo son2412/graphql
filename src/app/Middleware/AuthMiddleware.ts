@@ -1,5 +1,5 @@
 import { verify } from 'jsonwebtoken';
-import { Exception } from '@service/Exception';
+import { Exception } from '@util/Exception';
 import { User } from '@entity/User';
 
 export const customAuthChecker = async ({ root, args, context, info }, roles = []) => {

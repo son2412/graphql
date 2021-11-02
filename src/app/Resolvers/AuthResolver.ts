@@ -1,8 +1,8 @@
 import { User } from '@entity/index';
-import { Exception } from '@service/Exception';
+import { Exception } from '@util/Exception';
 import { Resolver, Arg, Mutation } from 'type-graphql';
 import { CreateUserInput } from '@input/CreateUserInput';
-import { Auth } from '@service/Auth';
+import { Auth } from '@util/Auth';
 import { AuthSchema } from '@schema/AuthSchema';
 import { IsNull } from 'typeorm';
 
