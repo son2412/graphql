@@ -1,6 +1,7 @@
 import { verify } from 'jsonwebtoken';
 import { Exception } from '@util/Exception';
 import { User } from '@entity/User';
+import { Request, Response, NextFunction } from 'express';
 
 export const customAuthChecker = async ({ root, args, context, info }, roles = []) => {
   let token = context.token;
@@ -33,3 +34,22 @@ export const customAuthChecker = async ({ root, args, context, info }, roles = [
   }
   return true;
 };
+
+export function AuthMiddleware(req: Request, res: Response, next: NextFunction) {
+  let token = req.headers['authorization'] || '';
+  if (token.startsWith('Bearer ')) {
+    token = token.slice(7, token.length);
+  }
+
+  if (!token) {
+    return res.status(401).json({});
+  }
+
+  verify(token, process.env.JWT_SECRET, async (err, decode) => {
+    if (err) {
+      return res.status(401).json({});
+    }
+    req.user = decode.data;
+    next();
+  });
+}

@@ -10,7 +10,6 @@ import { SubscriptionServer } from 'subscriptions-transport-ws';
 import { execute, subscribe } from 'graphql';
 import { createServer } from 'http';
 import { graphqlUploadExpress } from 'graphql-upload';
-import * as bodyParser from 'body-parser';
 import routes from '@router/index';
 
 const startServer = async () => {
@@ -40,7 +39,7 @@ const startServer = async () => {
   });
   const path = process.env.ROOT_PATH || '/graphql';
   const app = express();
-  app.use(bodyParser.json());
+  app.use(express.urlencoded({ extended: true }), express.json(), express.text());
   app.use('/upload', express.static('uploads'));
   // app.use(cors());
   app.post('/webhook', (req: express.Request, res: express.Response) => {});

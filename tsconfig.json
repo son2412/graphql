@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "lib": ["es5", "es6"],
+    "lib": ["es5", "es6", "es2015"],
     "target": "es5",
     "module": "commonjs",
     "moduleResolution": "node",
@@ -24,7 +24,9 @@
       "@namespace/*": ["app/Namespace/*"],
       "@schema/*": ["app/Schema/*"],
       "@router/*": ["routes/*"],
-      "@repository": ["app/Repositories/*"]
+      "@controller/*": ["controller/*"],
+      "@repository/*": ["app/Repositories/*"],
+      "@service/*": ["app/Services/*"]
     }
   },
   "include": ["src/**/*"],

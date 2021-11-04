@@ -14,6 +14,7 @@
       "typescript": "3.9.6"
    },
    "dependencies": {
+      "@hapi/joi": "^17.1.1",
       "agora-access-token": "^2.0.4",
       "apollo-server": "^2.25.1",
       "apollo-server-express": "^2.15.1",
@@ -58,7 +59,9 @@
       "@namespace": "build/app/Namespace",
       "@schema": "build/app/Schema",
       "@router": "build/routes",
-      "@repository": "build/app/Repositories"
+      "@controller": "build/controller",
+      "@repository": "build/app/Repositories",
+      "@service": "build/app/Services"
    },
    "scripts": {
       "dev": "tsc-watch --onSuccess \"nodemon ./build/index.js\"",
